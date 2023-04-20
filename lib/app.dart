@@ -36,7 +36,6 @@ class ShrineApp extends StatelessWidget {
         // TODO: Pass _currentCategory for frontLayer (104)
         // TODO: Change backLayer field value to CategoryMenuPage (104)
       },
-      // TODO: Customize the theme (103)
       theme: _kShrineTheme,
     );
   }
