@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:shrine/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -70,13 +71,17 @@ class _LoginPageState extends State<LoginPage> {
                     primary: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
-                // TODO: Add an elevation to NEXT (103)
                 // TODO: Add a beveled rectangular border to NEXT (103)
                 ElevatedButton(
                   child: const Text("NEXT"),
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: kShrineBrown900,
+                    backgroundColor: kShrinePink100,
+                    elevation: 8.0,
+                  ),
                 ),
               ],
             ),
