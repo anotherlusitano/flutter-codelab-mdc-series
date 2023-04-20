@@ -25,12 +25,13 @@ class Backdrop extends StatefulWidget {
 }
 
 class _FrontLayer extends StatelessWidget {
-  // TODO: Add on-tap callback (104)
   const _FrontLayer({
     Key? key,
+    this.onTap,
     required this.child,
   }) : super(key: key);
 
+  final VoidCallback? onTap;
   final Widget child;
 
   @override
@@ -43,7 +44,14 @@ class _FrontLayer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          // TODO: Add a GestureDetector (104)
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onTap,
+            child: Container(
+              height: 40.0,
+              alignment: AlignmentDirectional.centerStart,
+            ),
+          ),
           Expanded(
             child: child,
           ),
@@ -99,13 +107,11 @@ class _BackdropState extends State<Backdrop>
     }
   }
 
-  // TODO: Add BuildContext and BoxConstraints parameters to _buildStack (104)
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
     const double layerTitleHeight = 48.0;
     final Size layerSize = constraints.biggest;
     final double layerTop = layerSize.height - layerTitleHeight;
 
-    // TODO: Create a RelativeRectTween Animation (104)
     Animation<RelativeRect> layerAnimation = RelativeRectTween(
       begin: RelativeRect.fromLTRB(
           0.0, layerTop, 0.0, layerTop - layerSize.height),
@@ -115,16 +121,14 @@ class _BackdropState extends State<Backdrop>
     return Stack(
       key: _backdropKey,
       children: <Widget>[
-        // TODO: Wrap backLayer in an ExcludeSemantics widget (104)
         ExcludeSemantics(
           child: widget.backLayer,
           excluding: _frontLayerVisible,
         ),
-        // TODO: Add a PositionedTransition (104)
         PositionedTransition(
           rect: layerAnimation,
           child: _FrontLayer(
-            // TODO: Implement onTap property on _BackdropState (104)
+            onTap: _toggleBackdropLayerVisibility,
             child: widget.frontLayer,
           ),
         ),
