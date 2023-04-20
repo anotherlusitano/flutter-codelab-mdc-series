@@ -88,6 +88,17 @@ class _BackdropState extends State<Backdrop>
         velocity: _frontLayerVisible ? -_kFlingVelocity : _kFlingVelocity);
   }
 
+  @override
+  void didUpdateWidget(Backdrop old) {
+    super.didUpdateWidget(old);
+
+    if (widget.currentCategory != old.currentCategory) {
+      _toggleBackdropLayerVisibility();
+    } else if (!_frontLayerVisible) {
+      _controller.fling(velocity: _kFlingVelocity);
+    }
+  }
+
   // TODO: Add BuildContext and BoxConstraints parameters to _buildStack (104)
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
     const double layerTitleHeight = 48.0;
